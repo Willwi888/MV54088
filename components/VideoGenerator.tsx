@@ -239,15 +239,25 @@ const VideoGenerator: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                       </button>
                   </div>
                   {/* Right Column: Preview */}
-                  <div className="flex flex-col items-center justify-center bg-gray-900/50 border border-gray-600 rounded-md p-4 min-h-[300px] md:min-h-full">
-                      {generatedVideoUrl ? (
+                  <div className="relative flex flex-col items-center justify-center bg-gray-900/50 border border-gray-600 rounded-md p-4 min-h-[300px] md:min-h-full overflow-hidden">
+                      {generatedVideoUrl && !loadingState ? (
                           <video src={generatedVideoUrl} controls autoPlay loop className="w-full h-full object-contain rounded-md" />
                       ) : imageUrl ? (
-                          <img src={imageUrl} alt="Preview" className="w-full h-full object-contain rounded-md" />
+                          <img src={imageUrl} alt="Preview" className={`w-full h-full object-contain rounded-md transition-opacity duration-300 ${loadingState ? 'opacity-25' : 'opacity-100'}`} />
                       ) : (
                           <div className="text-center text-gray-500">
                             <p>圖片和影片預覽</p>
                           </div>
+                      )}
+                      
+                      {loadingState && imageUrl && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black/30 backdrop-blur-sm">
+                          <svg className="animate-spin h-8 w-8 text-white mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <p className="font-semibold">正在處理...</p>
+                        </div>
                       )}
                   </div>
                 </div>

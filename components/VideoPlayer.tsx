@@ -304,8 +304,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ timedLyrics, audioUrl, imageU
 
     try {
         const coreURL = window.crossOriginIsolated
-            ? 'https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/umd/ffmpeg-core.js'
-            : 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js';
+            ? 'https://unpkg.com/@ffmpeg/core-mt@0.12.10/dist/umd/ffmpeg-core.js'
+            : 'https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd/ffmpeg-core.js';
             
         setExportProgress({ message: '正在載入 FFMpeg 核心...', progress: 2, details: '可能需要一點時間' });
         await ffmpeg.load({ coreURL });
